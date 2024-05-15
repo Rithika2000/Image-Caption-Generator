@@ -1,0 +1,71 @@
+body {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+    overflow: hidden;
+    height: 100vh;
+  }
+  
+  .container {
+    text-align: center;
+    position: relative;
+    height: 100%;
+  }
+  
+  .eye-icon {
+    font-size: 200px;
+    color: rgba(255, 255, 255, 0.8);
+    cursor: pointer;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+    position: relative;
+    top: 20px;
+  }
+  
+  .eye-tooltip {
+    display: none;
+    position: absolute;
+    top: calc(100% + 10px);
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: rgba(255, 255, 255, 0.8);
+    padding: 10px;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    font-size: 14px;
+    color: #333;
+    z-index: 2;
+    width: 200px;
+    text-align: center;
+  }
+  
+  .eye-icon:hover + .eye-tooltip {
+    display: block;
+  }
+  
+  h1 {
+    color: #fff;
+    font-size: 36px;
+    margin-top: 20px;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+  }
+  
+  /* Animation */
+  @keyframes splitJoin {
+    0% {
+      background-position: 0% 50%;
+    }
+    50% {
+      background-position: 100% 50%;
+    }
+    100% {
+      background-position: 0% 50%;
+    }
+  }
+  
+  body {
+    background-image: url('https://img.freepik.com/premium-photo/futuristic-robotic-eye-with-advanced-lens-system-digital-interface_1056572-25667.jpg?size=626&ext=jpg&ga=GA1.1.34264412.1713398400&semt=ais');
+    background-size: cover;
+    background-repeat: no-repeat;
+    animation: splitJoin 10s infinite;
+  }
+  

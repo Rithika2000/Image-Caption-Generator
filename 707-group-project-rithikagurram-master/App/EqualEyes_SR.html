@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>EqualEyes</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+      padding: 20px;
+      background-color: #f0f8ff; /* Faded blue tone */
+    }
+    h1 {
+      color: #333;
+    }
+    input[type="text"], select, button {
+      padding: 10px;
+      font-size: 16px;
+    }
+    input[type="text"] {
+      width: 300px;
+    }
+    button {
+      background-color: #4CAF50;
+      color: white;
+      border: none;
+      cursor: pointer;
+      margin-top: 10px;
+    }
+    #result {
+      margin-top: 20px;
+      font-size: 18px;
+      font-weight: bold;
+    }
+    img {
+      max-width: 100%;
+      height: auto;
+      margin-top: 20px;
+    }
+  </style>
+</head>
+<body>
+  <h1>EqualEyes</h1>
+  <label for="imageUpload">Upload Image:</label>
+  <input type="file" id="imageUpload" accept="image/*">
+  <button onclick="generateDescriptionFromFile()">Generate Description from File</button>
+  <br>
+  <select id="languageSelect">
+    <option value="en">English</option>
+    <!-- Add more options for other languages -->
+  </select>
+  <button id="audioButton" onclick="speakDescription()" disabled>Audio Description</button>
+  <div id="result"></div>
+  <img id="inputImage" src="" alt="Input Image" />
+
+  <script>
+    function generateDescriptionFromFile() {
+      const fileInput = document.getElementById('imageUpload');
+      const file = fileInput.files[0];
+      const formData = new FormData();
+      formData.append('image', file);
+      fetch('http://127.0.0.1:5000/upload_image', {
+        method: 'POST',
+        body: formData
+      })
+        .then(response => response.json())
+        .then(data => {
+          document.getElementById("result").textContent = data.description;
+          document.getElementById("inputImage").src = URL.createObjectURL(file);
+          document.getElementById("audioButton").disabled = false;
+        })
+        .catch(error => {
+          console.error('Error:', error);
+        });
+    }
+
+    function speakDescription() {
+      const description = document.getElementById("result").textContent;
+      const selectedLanguage = document.getElementById("languageSelect").value;
+      const utterance = new SpeechSynthesisUtterance(description);
+      utterance.lang = selectedLanguage;
+      window.speechSynthesis.speak(utterance);
+    }
+  </script>
+</body>
+</html>
