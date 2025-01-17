@@ -81,9 +81,6 @@ The Caption JSON file has the image id with the Caption  annotation which has be
 The segmentation, bbox, category_id, person_category_id, super_category which explains the location of each object, stuff category,person category. 
 
 
-![Alt Text](Images/Object_Instances.jpg)
-
-![Alt Text](Images/Super_Sub_ID.jpg)
 
 ## Data 2: ImageNet
 
