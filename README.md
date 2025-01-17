@@ -1,18 +1,5 @@
 # **EqualEyes: Image Caption Generator**
 
-## **Team**
-- Shashank Guda (POC)
- https://github.com/gudashashank
-- Soundarya Ravi
- https://github.com/soravi18
-- Ramya Chowdary Patchala
- https://github.com/ramyacp14 
-- Rithika Gurram
-https://github.com/Rithika2000
-- Vishnu Charugundla
-https://github.com/VishnuCharugundla
-
-
 ## **Introduction**
 
 The project aims to push image captioning technology beyond what currently exists. We will combine recent advances in image recognition and language modeling to generate novel descriptive captions that go beyond just naming objects and actions. The goal is to create a system that provides rich, detailed, and natural descriptions of photographs to make them more accessible and meaningful for all. Training on open and varied image datasets will be key to ensuring the system can generalize well and avoid bias. We will also prioritize evaluation methods that measure how well the captions describe the full context of images, not just presence of objects. There are still some challenges ahead, but by focusing on inclusivity and the uniqueness of this multi-modal approach, we hope to create something that moves image captioning technology forward in an impactful way.
@@ -94,9 +81,11 @@ The Caption JSON file has the image id with the Caption  annotation which has be
 The segmentation, bbox, category_id, person_category_id, super_category which explains the location of each object, stuff category,person category. 
 
 
-![Alt Text](Images/Object_Instances.jpg)
+![Object_Instances](https://github.com/user-attachments/assets/8fb4b1f4-6329-4b54-83d6-d48ba8e37d75)
 
-![Alt Text](Images/Super_Sub_ID.jpg)
+![Super_Sub_ID](https://github.com/user-attachments/assets/3ee571e8-b140-47ba-a3cc-544d2c08f091)
+
+
 
 ## Data 2: ImageNet
 
@@ -318,14 +307,16 @@ Our final model is a **BLIP** model, upon fine tuning it and using the epoch siz
 The application which we have developed is built on **BLIP: Bootstrapping Language Image Pre-training** for image captioning. It gave lesser loss compared to the other three models, moreover it has a filter to remove noise from website data making it a better fit for the application.
 
 Attaching a sample Image below from the application: 
-![Alt Text](Images/Results_Section.jpg)
+
+![Results_Section](https://github.com/user-attachments/assets/61e27675-ad34-4492-a59f-ba734b1db12e)
 
 
 ### **BLEU Score**
 
 The BLEU (Bilingual Evaluation Understudy) score is a metric used to evaluate the quality of machine-generated text, such as translations or captions. It measures how closely the generated text matches human-written reference text, based on the overlap of n-grams (sequences of n words) between the two. A higher BLEU score indicates a closer resemblance between the generated and reference texts, suggesting better quality. The average BLEU score of **0.72** indicates that, on average, the generated captions closely match the reference captions by approximately **72%.**
 
-![Alt Text](Images/BLEU.jpg)
+![BLEU](https://github.com/user-attachments/assets/f91b0a7a-6bdd-4612-bf6e-e6939e3d3fdc)
+
 
 
 ## **Discussion**
@@ -345,12 +336,14 @@ We are quite satisfied with where we are in the results at the moment, we are st
 The task is GPU bound, but everything we have done so far is using a high computational CPU with 48 cores, so there was a time constraint and idling out issue which restricted in finding more bbox(Boundary Boxes for Object Segmentation) which has been displayed in the image below.
 
 
-![Alt Text](Images/cpu_idling.jpg)
+![cpu_idling](https://github.com/user-attachments/assets/a9a79a9f-6d2a-4d84-97b0-571322c795ef)
+
 
 Explanation: Here our model works best with objects we trained it on, for example few animals, fruits, food categories..etc, here the below image has a caption quoting it as a clock tower instead of captioning it as a Eiffel tower, we trained a model how to identify an object as a clock/clock tower as its one of the object instance in coco2017 dataset. We wanted to use more object and stuff categories, but even here due to disk limitation and CPU idling out we had to train on less than half of the data.
 
 
-![Alt Text](Images/EiffelTower_ClockTower.jpg)
+![EiffelTower_ClockTower](https://github.com/user-attachments/assets/a4ab3d58-7fef-4ee1-b064-f4fad9870b3b)
+
 
 
 #### **Addressing the Stakeholder Needs**
@@ -360,7 +353,9 @@ Our main primary stakeholders are the people with Visual Impairments, the web-ap
 People who reach a malignant stage of diabetic retinopathy lose more than half their sight and cannot distinguish objects properly. With this application, they don't need an additional person to visualize something.
 
 Our second stakeholders are the social media users, we have tested it with random images from the search engines, its able to caption those images, people can utilize these to explain an image they are posting in a generic way, for example, flower garden in middle of a city park, its one of the caption our web application generated when we tested out. It makes browsing engaging, with more classified training we could even utilize it to identify plant species to very specific bird names.
-![Alt Text](Images/Garden.jpg)
+
+
+![Garden](https://github.com/user-attachments/assets/885642d3-72ca-4aa7-b3a3-9a1eb02d55b0)
 
 
 Our third stakeholders are the teachers and educators, this could be next LCMS(Learning Content Management System) in schools, instead of pages of notes and efforts, they could support early literacy with advanced vocabulary from the captions generated, a child would be intrigued to see different grammatical way of explaining a picture, this would increase the language development at the earlier age. 
@@ -374,9 +369,9 @@ Our main Limitation was the computational resource allocation, it happened at th
 
 We tried two different approaches to get this working faster as each model took from 8-25 hours, we tried creating a virtual machine with high end CPU and also we were able to get the data in using the Azure CLI integration, but again it did not have any GPU access in it, so we switched to the Azure ML Instance which was allocated.
 
-In this second approach, we got the data in through azure blob storage, again it had some issues with unzipping and mounting inside the notebook as the process expected it to be in same working directory, so we uploaded and unzipped right inside the path [['Users/soravi/COCO_Extracted']]. Here the main issue was, even the multi core CPU with 48 cores started idling out after an hour or two given the model ran for 8+ hours, it started timing out and the disk utilization went to zero.
+In this second approach, we got the data in through azure blob storage, again it had some issues with unzipping and mounting inside the notebook as the process expected it to be in same working directory, so we uploaded and unzipped right inside the path . Here the main issue was, even the multi core CPU with 48 cores started idling out after an hour or two given the model ran for 8+ hours, it started timing out and the disk utilization went to zero.
 
-We tried multiple ways to initialize the GPU, but the tensorflow version inside the azure ml instance had a compatibility issue with the GPU setting, the tensorflow version 2.11.0 is not compatible for the tensorflow-gpu installation. [[attached- gpusetup notebook for the results]], we tried to downgrade it to archive version but it needed downgrading of numpy, flatbusters and few other libraries and it started conflicting with the code. CUDA drivers were installed even to address this but given the nick of time, we had to switch to parallel running of 4 models locally in our systems to get results.
+We tried multiple ways to initialize the GPU, but the tensorflow version inside the azure ml instance had a compatibility issue with the GPU setting, the tensorflow version 2.11.0 is not compatible for the tensorflow-gpu installation. , we tried to downgrade it to archive version but it needed downgrading of numpy, flatbusters and few other libraries and it started conflicting with the code. CUDA drivers were installed even to address this but given the nick of time, we had to switch to parallel running of 4 models locally in our systems to get results.
 
 For the primary stakeholder of visually impaired people, we wanted to make something which can take an image, puts a bbox(boundary box) over every objects available there and explain each corner of image to give them a visual image in the head rather than one caption which gives a generic overall caption. Given the training restriction with lesser epoch and batch size, we couldn't achieve much in this area.
 
