@@ -301,15 +301,12 @@ Our final model is a **BLIP** model, upon fine tuning it and using the epoch siz
 
 The application which we have developed is built on **BLIP: Bootstrapping Language Image Pre-training** for image captioning. It gave lesser loss compared to the other three models, moreover it has a filter to remove noise from website data making it a better fit for the application.
 
-Attaching a sample Image below from the application: 
-![Alt Text](Images/Results_Section.jpg)
 
 
 ### **BLEU Score**
 
 The BLEU (Bilingual Evaluation Understudy) score is a metric used to evaluate the quality of machine-generated text, such as translations or captions. It measures how closely the generated text matches human-written reference text, based on the overlap of n-grams (sequences of n words) between the two. A higher BLEU score indicates a closer resemblance between the generated and reference texts, suggesting better quality. The average BLEU score of **0.72** indicates that, on average, the generated captions closely match the reference captions by approximately **72%.**
 
-![Alt Text](Images/BLEU.jpg)
 
 
 ## **Discussion**
@@ -329,12 +326,7 @@ We are quite satisfied with where we are in the results at the moment, we are st
 The task is GPU bound, but everything we have done so far is using a high computational CPU with 48 cores, so there was a time constraint and idling out issue which restricted in finding more bbox(Boundary Boxes for Object Segmentation) which has been displayed in the image below.
 
 
-![Alt Text](Images/cpu_idling.jpg)
-
 Explanation: Here our model works best with objects we trained it on, for example few animals, fruits, food categories..etc, here the below image has a caption quoting it as a clock tower instead of captioning it as a Eiffel tower, we trained a model how to identify an object as a clock/clock tower as its one of the object instance in coco2017 dataset. We wanted to use more object and stuff categories, but even here due to disk limitation and CPU idling out we had to train on less than half of the data.
-
-
-![Alt Text](Images/EiffelTower_ClockTower.jpg)
 
 
 #### **Addressing the Stakeholder Needs**
@@ -344,7 +336,7 @@ Our main primary stakeholders are the people with Visual Impairments, the web-ap
 People who reach a malignant stage of diabetic retinopathy lose more than half their sight and cannot distinguish objects properly. With this application, they don't need an additional person to visualize something.
 
 Our second stakeholders are the social media users, we have tested it with random images from the search engines, its able to caption those images, people can utilize these to explain an image they are posting in a generic way, for example, flower garden in middle of a city park, its one of the caption our web application generated when we tested out. It makes browsing engaging, with more classified training we could even utilize it to identify plant species to very specific bird names.
-![Alt Text](Images/Garden.jpg)
+
 
 
 Our third stakeholders are the teachers and educators, this could be next LCMS(Learning Content Management System) in schools, instead of pages of notes and efforts, they could support early literacy with advanced vocabulary from the captions generated, a child would be intrigued to see different grammatical way of explaining a picture, this would increase the language development at the earlier age. 
